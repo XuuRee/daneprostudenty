@@ -1,6 +1,6 @@
 import React from 'react'
 import '../Static/Menu.css'
-import logo_url from '../Images/logo.png'
+import * as FileSaver from "file-saver";
 
 type MenuProps = {
 	page: string;
@@ -16,21 +16,53 @@ class Menu extends React.Component<MenuProps & DispatchMenuProps> {
   }
 
 	handleHomeChange = () => this.props.onPageChange("home")
-	handleAboutChange = () => this.props.onPageChange("about")
+  handleAboutChange = () => this.props.onPageChange("about")
+  handleTaxationChange = () => this.props.onPageChange("taxation")
+  handleAPIChange = async () => {
+    console.log("Start fetching API...")
+    
+    const form = {
+      name: "Filip",
+      surname: "Valchar"
+    }
+
+    const response = await fetch('https://api-dps.herokuapp.com/createXLS', {
+      method: 'POST',
+      body: JSON.stringify(form)
+    })
+    .then(response => { return response.arrayBuffer() });
+
+    const file = new Blob([response], { type: "application/octet-stream" }) // , { type: "application/vnd.ms-excel" }
+    FileSaver.saveAs(file, "form.xlsx");
+
+    /*
+    if (response.ok) {
+      console.log(response.formData.toString())
+      console.log("result:")
+      console.log(response.json())
+    } else {
+      console.log("error")
+    }
+    */
+  }
 
   render () {
     return (
-      <div className="nav">
-        <img alt="logo" src={logo_url} />
-        <div className="nav-right">
-					<button className="nav-item active" onClick={this.handleHomeChange}>Úvod</button>
-          <button className="nav-item" onClick={this.handleAboutChange}>O projektu</button>
-					{/*
-					<button >Quis</button>
-					<button >Turpis</button>
-					*/}
+      <React.Fragment>
+        <div className="nav">
+          {/* 
+          <img alt="logo" src={logo_url} /> 
+          */}
+          <div className="nav-right">
+				  	<button className={this.props.page === "home" ? "nav-item active" : "nav-item"} onClick={this.handleHomeChange}>Úvod</button>
+            <button className={this.props.page === "taxation" ? "nav-item active" : "nav-item"} onClick={this.handleTaxationChange}>Formulář</button>
+            {/* 
+            <button className="nav-item" onClick={this.handleAPIChange}>API</button> 
+            <button className="nav-item" onClick={this.handleAboutChange}>O projektu</button>
+            */}
+          </div>
         </div>
-      </div>
+      </React.Fragment>
     )
   }
 }

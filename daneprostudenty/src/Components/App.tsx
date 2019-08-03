@@ -3,6 +3,7 @@ import '../Static/App.css';
 import Menu from "./Menu";
 import Home from './Home';
 import About from './About';
+import Taxation from './Taxation';
 
 class App extends React.Component {
   state = {
@@ -22,8 +23,11 @@ class App extends React.Component {
       case "about":
         content = <About />
         break;
+      case "taxation":
+        content = <Taxation />
+        break;
       default:
-        console.error("Error - switch in App.tsx is not consistent.");  
+        console.error("Error - switch in App.tsx is not consistent!");  
         break;
     }
 
@@ -33,7 +37,6 @@ class App extends React.Component {
           <Menu page={this.state.page} onPageChange={this.handlePageChange} />
         </div>
         <div className="ui container">
-          <h1>Lorem ipsum dolor, <br />consectetuer adipiscing elit.</h1>
           {content}
         </div>
     </div>

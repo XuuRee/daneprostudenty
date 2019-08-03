@@ -1,6 +1,7 @@
 .nav {
 	overflow: hidden;
-	padding: 1em;
+  padding: 1em;
+  margin-bottom: 2em;
 }
 
 .nav-right {
@@ -8,25 +9,25 @@
 }
 
 .nav-item {
-	background-color: yellow; /* #F2F2F2 */
-  border-bottom: 0.15em solid #000000;
+	background-color: white;
+  border: none;
   color: #000000;
   padding: 1em 1.5em;
+  margin: 0 0.5em 0 0.5em;
   text-align: center;
   text-decoration: none;
   display: inline-block;
 	font-size: 1.15em;
 	font-weight: bold;
-  /* margin: 0.25em 2px; */
   cursor: pointer;
 }
 
 .nav-item:hover {
-	border-bottom: 0.15em solid #000000;
+	border-bottom: 0.25em solid #000000;
 }
 
 .nav button.active {
-  border-bottom: 0.15em solid purple;
+  border-bottom: 0.25em solid black;
 }
 
 .nav a {
