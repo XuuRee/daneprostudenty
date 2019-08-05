@@ -3,9 +3,10 @@
 	min-height: 100vh;
 }
 
+/* grid */
+
 .container {
 	margin: 0.75em;
-	/* background-color: red; */
 }
   
 .row {
@@ -21,6 +22,15 @@
 	flex-basis: 100%;
 	flex: 1;
 }
+
+.form-column {
+  display: flex;
+  flex-direction: column;
+  flex-basis: 100%;
+	flex: 2;
+}
+
+/* other */
 
 button:focus {
 	outline:0;

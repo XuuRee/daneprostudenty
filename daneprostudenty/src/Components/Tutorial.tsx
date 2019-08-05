@@ -2,7 +2,7 @@ import React from 'react'
 
 const Tutorial: React.SFC = () => {
   return (
-    <div className="container">
+      <React.Fragment>
         <div className="row">
             <h1>1. Vyplň formulář</h1>
             <div className="row">
@@ -24,7 +24,7 @@ const Tutorial: React.SFC = () => {
         <div className="row">
             <h1>4. Zkontroluj si své údaje</h1>
         </div>
-    </div>
+    </React.Fragment>
   );
 }
 

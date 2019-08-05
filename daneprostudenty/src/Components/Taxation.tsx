@@ -17,9 +17,27 @@ class Taxation extends React.Component {
         descriptive_number: '',
         orientation_number: '',
         zip_code: '',
-        /* other */
+        /* spouse */
         spouse: false,
+        spouse_name: '',
+        spouse_surname: '',
+        spouse_degree: '',
+        spouse_personal_id: '',
+        spouse_months: '',
+        spouse_disability: false,
+        /* other */
+        help: undefined,
     }
+
+    /* help events */
+    handleStreetHelpChange = () => {
+        if (this.state.help === "streetHelp") {
+            this.setState({ help: undefined })
+        } else {
+            this.setState({ help: "streetHelp" })
+        }
+    }
+
 
     /* personal events */
     handleNameChange = (event: React.ChangeEvent<HTMLInputElement>) => this.setState({ name: event.target.value })
@@ -55,23 +73,42 @@ class Taxation extends React.Component {
         console.log(this.state.orientation_number)
         console.log(this.state.zip_code)
         console.log(this.state.spouse)
+        console.log(this.state.spouse_name)
+        console.log(this.state.spouse_surname)
+        console.log(this.state.spouse_degree)
+        console.log(this.state.spouse_personal_id)
+        console.log(this.state.spouse_months)
+        console.log(this.state.spouse_disability)
+        console.log(this.state.help)
     }
 
     render () {
+
+        const streetHelp = 
+            <div className="ui info message">
+                <div className="header">Ulice</div>
+                <p>- pokud bydlíš na adrese, která žádnou ulici nemá, potom do tohoto pole vyplň název města.</p>
+            </div>
+
+        const spouseHelp = 
+            <div className="ui info message">
+                <div className="header">Pozor!</div>
+                <p>Slevu na dani může uplatnit pouze jeden z vás.</p>
+            </div>
+
         return (
-            <div className="ui grid">
-                <div className="ui ten wide column grid"> 
+            <div className="row">
+                <div className="column" />
+                <div className="form-column" > 
                     {/* 
                     style={{ backgroundColor: "pink" }} 
                     */}
                     <h1>Daňové přiznání - formulář pro rok 2018</h1>
                     <br />
-                    <div className="ui info icon message">
+                    <div className="ui icon message">
                         <img className="ui image" style={{ marginRight: "1em" }} width="60px" height="37px" alt="" src={school_hat_url} />    
                         <div className="content">
-                            <div className="header">
-                                Rád by ses dozvěděl o daňovém přiznání více?
-                            </div>
+                            <div className="header">Rád by ses dozvěděl o daňovém přiznání více?</div>
                             <p>Všechny informace nalezneš na oficiálním webu <a href="https://www.financnisprava.cz/cs/dane-elektronicky/danovy-portal"><b>ministerstva financí</b></a>.</p>
                         </div>
                     </div>
@@ -122,7 +159,7 @@ class Taxation extends React.Component {
                         <div className="fields">
                             <div className="five wide field">
                                 <label>Ulice</label>
-                                <input type="text" placeholder="Ulice" value={this.state.street} onChange={this.handleStreetChange} />
+                                <input type="text" placeholder="Ulice" value={this.state.street} onClick={this.handleStreetHelpChange} onChange={this.handleStreetChange} />
                             </div>
                             <div className="three wide field">
                                 <label>Číslo popisné</label>
@@ -133,6 +170,7 @@ class Taxation extends React.Component {
                                 <input type="text" placeholder="Číslo orientační" value={this.state.orientation_number} onChange={this.handleOrientationNumberChange} />
                             </div>
                         </div>
+                        {this.state.help === "streetHelp" && streetHelp}
                         <div className="fields">
                             <div className="three wide field">
                                 <label>PSČ</label>
@@ -142,20 +180,63 @@ class Taxation extends React.Component {
                         <h4>3. Rodina</h4>
                         <div className="fields">
                             <div className="field ui checkbox">
-                                <input type="checkbox" name="Manžel/manželka" checked={this.state.spouse} onChange={this.handleSpouseChange} />
-                                <label>Manžel / Manželka</label>
+                                <input type="checkbox" name="Manžel / manželka" checked={this.state.spouse} onChange={this.handleSpouseChange} />
+                                <label>Mám manžela / manželku a chci uplatnit slevu.</label>
                             </div>
                         </div>
+                        {this.state.spouse && spouseHelp}
+                        {
+                            this.state.spouse && 
+                                <div className="fields">
+                                    <div className="four wide field">
+                                        <label>Jméno</label>
+                                        <input type="text" placeholder="Jméno" value={this.state.spouse_name} />
+                                    </div>
+                                    <div className="field">
+                                        <label>Přijmení</label>
+                                        <input type="text" placeholder="Přijmení" value={this.state.spouse_surname} />
+                                    </div>
+                                    <div className="two wide field">
+                                        <label>Titul</label>
+                                        <input type="text" placeholder="Titul" value={this.state.spouse_degree} />
+                                    </div>
+                                </div>
+                        }
+                        {
+                            this.state.spouse && 
+                                <div className="fields">
+                                     <div className="six wide field">
+                                        <label>Rodné číslo</label>
+                                        <input type="text" placeholder="Rodné číslo" value={this.state.spouse_personal_id} />
+                                    </div>
+                                </div>
+                        }
+                        { 
+                            this.state.spouse && 
+                                <div className="fields">
+                                    <div className="field">
+                                        <label>Počet měsíců</label>
+                                        <input type="text" placeholder="Počet měsíců" value={this.state.spouse_months} />
+                                    </div>
+                                </div>
+                        }
+                        { 
+                            this.state.spouse && 
+                                <React.Fragment>
+                                    <br />
+                                    <div className="fields">
+                                        <div className="field ui checkbox">
+                                            <input type="checkbox" name="Manžel / manželka" checked={this.state.spouse_disability} />
+                                            <label>ZTP</label>
+                                        </div>
+                                    </div>
+                                </React.Fragment>
+                        }
                         <br />
                         <button className="positive ui button" onClick={this.handleSubmitForm}>Odeslat formulář</button>
                     </div>
                 </div>
-                <div className="ui six wide column grid">
-                    {/*
-                    <h2>Vysvětlení</h2>
-                    <h4>V tomto sloupci najdeš všechny doplňující informace k jednotlivým položkám formuláře.</h4>
-                    */}
-                </div>
+                <div className="column" />
             </div>
         )
     }

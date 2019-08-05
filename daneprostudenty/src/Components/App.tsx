@@ -40,7 +40,7 @@ class App extends React.Component {
         <div className="ui container">
           <Menu page={this.state.page} onPageChange={this.handlePageChange} />
         </div>
-        <div className="ui container">
+        <div className="container">
           {content}
         </div>
     </div>
