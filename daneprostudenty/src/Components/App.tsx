@@ -3,6 +3,7 @@ import '../Static/App.css';
 import Menu from "./Menu";
 import Home from './Home';
 import About from './About';
+import Tutorial from './Tutorial';
 import Taxation from './Taxation';
 
 class App extends React.Component {
@@ -22,6 +23,9 @@ class App extends React.Component {
         break;
       case "about":
         content = <About />
+        break;
+      case "tutorial":
+        content = <Tutorial />
         break;
       case "taxation":
         content = <Taxation />

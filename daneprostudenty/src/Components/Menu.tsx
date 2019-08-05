@@ -17,6 +17,7 @@ class Menu extends React.Component<MenuProps & DispatchMenuProps> {
 
 	handleHomeChange = () => this.props.onPageChange("home")
   handleAboutChange = () => this.props.onPageChange("about")
+  handleTutorialChange = () => this.props.onPageChange("tutorial")
   handleTaxationChange = () => this.props.onPageChange("taxation")
   handleAPIChange = async () => {
     console.log("Start fetching API...")
@@ -55,6 +56,7 @@ class Menu extends React.Component<MenuProps & DispatchMenuProps> {
           */}
           <div className="nav-right">
 				  	<button className={this.props.page === "home" ? "nav-item active" : "nav-item"} onClick={this.handleHomeChange}>Úvod</button>
+            <button className={this.props.page === "tutorial" ? "nav-item active" : "nav-item"} onClick={this.handleTutorialChange}>Návod</button>
             <button className={this.props.page === "taxation" ? "nav-item active" : "nav-item"} onClick={this.handleTaxationChange}>Formulář</button>
             {/* 
             <button className="nav-item" onClick={this.handleAPIChange}>API</button> 

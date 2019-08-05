@@ -13,7 +13,18 @@ const Home: React.SFC = () => {
           <br />
           <h1>Potřebuješ pomoc s vyplněním daňového přiznání?</h1>
           <br />
+          <button className="big ui button">Jak na to?</button>
+          <button className="big ui positive button">Vyplnit daňové přiznání</button>
+          {/*
+          <div className="ui buttons">
+            <button className="huge ui button">Jak na to?</button>
+            <div className="or"></div>
+            <button className="huge ui positive button">Save</button>
+          </div>
+          */}
+          {/* 
           <button className="positive huge ui button">Vyplnit daňové přiznání</button>
+          */}
         </div>
       </div>
     </div>

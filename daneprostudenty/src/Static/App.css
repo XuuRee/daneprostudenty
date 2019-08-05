@@ -3,6 +3,25 @@
 	min-height: 100vh;
 }
 
+.container {
+	margin: 0.75em;
+	/* background-color: red; */
+}
+  
+.row {
+	display: flex;
+	flex-direction: row;
+	flex-wrap: wrap;
+	width: 100%;
+}
+  
+.column {
+	display: flex;
+	flex-direction: column;
+	flex-basis: 100%;
+	flex: 1;
+}
+
 button:focus {
 	outline:0;
 }
