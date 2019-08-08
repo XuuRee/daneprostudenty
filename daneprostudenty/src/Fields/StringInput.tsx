@@ -10,6 +10,7 @@ type InputProps = {
 
 type DispatchInputProps = {
   onValueChange: (value: string) => void
+  onDescriptionChange?: () => void
 }
 
 class StringInput extends React.Component<InputProps & DispatchInputProps> {
@@ -36,7 +37,7 @@ class StringInput extends React.Component<InputProps & DispatchInputProps> {
     return (
       <div className={width + " field"}>
         <label>{this.props.label}</label>
-        <input type="text" placeholder={this.props.placeholder} value={this.state.current} onChange={this.handleValueChange} />
+        <input type="text" placeholder={this.props.placeholder} value={this.state.current} onClick={this.props.onDescriptionChange} onChange={this.handleValueChange} />
       </div>
     )
   }

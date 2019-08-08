@@ -20,7 +20,9 @@ const TaxForm: React.SFC<Form> = ({
     const handleSubmitForm = () => {
         console.log("[DEBUG] Submit event =>")
         console.log(personal.name)
-
+        console.log(personal.native_surname)
+        console.log(personal.surname)
+        
         // onSubmitForm();
     }
     
