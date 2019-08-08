@@ -1,9 +1,71 @@
 import React from 'react'
 import school_hat_url from "../Images/school-hat.png"
+import { Personal, Residence, Family } from '../State/State'
 
+type TaxationProps = {
+    label: string | null
+    personal: Personal
+    residence: Residence
+    family: Family
+}
+  
+type DispatchTaxationProps = {
+    onNameChange: (value: string) => void
+    onSubmitForm: () => void
+}
+
+const Taxation: React.SFC<TaxationProps & DispatchTaxationProps> = ({ label, personal, residence, family, onNameChange, onSubmitForm }) => {
+
+    const handleSubmitForm = () => {
+        console.log("[DEBUG] Submit event =>")
+        console.log(personal.name)
+
+        onSubmitForm();
+    }
+
+    const nameProps = { label: 'Jméno', placeholder: 'Jméno', value: personal.name, size: 4 }
+
+    return (
+        <div className="row">
+            <div className="column" />
+            <div className="form-column" > 
+                <h1>Daňové přiznání - formulář pro rok 2018</h1>
+                <br />
+                <div className="ui icon message">
+                    <img className="ui image" style={{ marginRight: "1em" }} width="60px" height="37px" alt="" src={school_hat_url} />    
+                    <div className="content">
+                        <div className="header">Rád by ses dozvěděl o daňovém přiznání více?</div>
+                        <p>Všechny informace nalezneš na oficiálním webu <a href="https://www.financnisprava.cz/cs/dane-elektronicky/danovy-portal"><b>ministerstva financí</b></a>.</p>
+                    </div>
+                </div>
+                <br />
+                <div className="ui form">
+                    <h4>1. Osobní údaje</h4>
+                    <div className="fields">
+                        {/*
+                        <div className="four wide field">
+                            <label>Jméno</label>
+                            <input type="text" placeholder="Jméno" value={this.state.name} onChange={this.handleNameChange} />
+                        </div>
+                        <StringInput {...nameProps} onValueChange={this.handleNameChange} />
+                        */}
+                    </div>
+                    <h4>2. Bydliště &nbsp;&nbsp;&nbsp;<i className="cz flag" /></h4>
+                    <br />
+                    <button className="positive ui button" onClick={handleSubmitForm}>Odeslat formulář</button>
+                </div>
+            </div>
+            <div className="column" />
+        </div>
+    )
+}
+
+export default Taxation;
+
+/* 
 class Taxation extends React.Component {
     state = {
-        /* personal */
+        
         name: '',
         surname: '',
         native_surname: '',
@@ -11,13 +73,13 @@ class Taxation extends React.Component {
         personal_id: '',
         phone_number: '',
         email: '',
-        /* residence */
+       
         city: '',
         street: '',
         descriptive_number: '',
         orientation_number: '',
         zip_code: '',
-        /* spouse */
+        
         spouse: false,
         spouse_name: '',
         spouse_surname: '',
@@ -25,11 +87,10 @@ class Taxation extends React.Component {
         spouse_personal_id: '',
         spouse_months: '',
         spouse_disability: false,
-        /* other */
+        
         help: undefined,
     }
 
-    /* help events */
     handleStreetHelpChange = () => {
         if (this.state.help === "streetHelp") {
             this.setState({ help: undefined })
@@ -39,8 +100,7 @@ class Taxation extends React.Component {
     }
 
 
-    /* personal events */
-    handleNameChange = (event: React.ChangeEvent<HTMLInputElement>) => this.setState({ name: event.target.value })
+    handleNameChange = (value: string) => this.setState({ name: value })
     handleNativeSurnameChange = (event: React.ChangeEvent<HTMLInputElement>) => this.setState({ native_surname: event.target.value })
     handleSurnameChange = (event: React.ChangeEvent<HTMLInputElement>) => this.setState({ surname: event.target.value })
     handleDegreeChange = (event: React.ChangeEvent<HTMLInputElement>) => this.setState({ degree: event.target.value })
@@ -48,14 +108,12 @@ class Taxation extends React.Component {
     handlePhoneNumberChange = (event: React.ChangeEvent<HTMLInputElement>) => this.setState({ phone_number: event.target.value })
     handleEmailChange = (event: React.ChangeEvent<HTMLInputElement>) => this.setState({ email: event.target.value })
     
-    /* residence events */
     handleCityChange = (event: React.ChangeEvent<HTMLInputElement>) => this.setState({ city: event.target.value })
     handleStreetChange = (event: React.ChangeEvent<HTMLInputElement>) => this.setState({ street: event.target.value })
     handleDescriptiveNumberChange = (event: React.ChangeEvent<HTMLInputElement>) => this.setState({ descriptive_number: event.target.value })
     handleOrientationNumberChange = (event: React.ChangeEvent<HTMLInputElement>) => this.setState({ orientation_number: event.target.value })
     handleZipCodeChange = (event: React.ChangeEvent<HTMLInputElement>) => this.setState({ zip_code: event.target.value })
 
-    /* other events */
     handleSpouseChange = () => this.setState({ spouse: !this.state.spouse })
 
     handleSubmitForm = () => {
@@ -96,13 +154,15 @@ class Taxation extends React.Component {
                 <p>Slevu na dani může uplatnit pouze jeden z vás.</p>
             </div>
 
+        const nameProps = { label: 'Jméno', placeholder: 'Jméno', value: '', size: 4 }
+
         return (
             <div className="row">
                 <div className="column" />
                 <div className="form-column" > 
-                    {/* 
+                    
                     style={{ backgroundColor: "pink" }} 
-                    */}
+                    
                     <h1>Daňové přiznání - formulář pro rok 2018</h1>
                     <br />
                     <div className="ui icon message">
@@ -116,10 +176,13 @@ class Taxation extends React.Component {
                     <div className="ui form">
                         <h4>1. Osobní údaje</h4>
                         <div className="fields">
+                            
                             <div className="four wide field">
                                 <label>Jméno</label>
                                 <input type="text" placeholder="Jméno" value={this.state.name} onChange={this.handleNameChange} />
                             </div>
+                            
+                            <StringInput {...nameProps} onValueChange={this.handleNameChange} />
                             <div className="field">
                                 <label>Rodné příjmení</label>
                                 <input type="text" placeholder="Rodné přijmení" value={this.state.native_surname} onChange={this.handleNativeSurnameChange} />
@@ -241,5 +304,4 @@ class Taxation extends React.Component {
         )
     }
 }
-  
-export default Taxation;
+*/

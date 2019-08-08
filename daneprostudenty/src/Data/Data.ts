@@ -40,7 +40,7 @@ const familyProps: Family = {
 }
 
 const formProps: Form = { 
-	label: null,
+	description: null,
 	personal: personalProps,
 	residence: residenceProps,
 	family: familyProps,

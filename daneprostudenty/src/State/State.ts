@@ -44,7 +44,7 @@ export type Family = {
 }
 
 export type Form = {
-	readonly label: string | null		// popis pro konkretni vstup 
+	readonly description: string | null		// popis pro konkretni vstup 
 	readonly personal: Personal		// osobni udaje
 	readonly residence: Residence		// bydliste
 	readonly family: Family		// rodina

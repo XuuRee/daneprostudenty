@@ -4,7 +4,7 @@ import Menu from "./Menu"
 import Home from './Home'
 import About from './About'
 import Tutorial from './Tutorial'
-import Taxation from './Taxation'
+import TaxForm from './Taxation/TaxForm'
 import State from '../State/State'
 import { connect } from 'react-redux'
 
@@ -25,7 +25,7 @@ const App: React.SFC<AppProps> = ({ menu, form }) => {
       content = <Tutorial />
       break
     case "taxation":
-      content = <Taxation {...form} />
+      content = <TaxForm {...form} />
       break
     default:
       console.error("Error - switch in App.tsx is not consistent!")

@@ -1,11 +1,27 @@
-export type SetLabel = {
-	readonly type: "SET_LABEL"
-	readonly label: string
+export type SetDescription = {
+	readonly type: "SET_DESCRIPTION"
+	readonly description: string
 };
 
-export const setLabel = (label: string): SetLabel => ({
-	type: "SET_LABEL",
-	label
+export const setDescription = (description: string): SetDescription => ({
+	type: "SET_DESCRIPTION",
+	description
 });
 
-export type FormActions = SetLabel
+/* personal actions */
+
+export type SetPersonalName = {
+	readonly type: "SET_PERSONAL_NAME"
+	readonly name: string
+};
+
+export const setPersonalName = (name: string): SetPersonalName => ({
+	type: "SET_PERSONAL_NAME",
+	name
+});
+
+export type PersonalActions = SetPersonalName
+
+/* form actions */
+
+export type FormActions = SetDescription | PersonalActions
