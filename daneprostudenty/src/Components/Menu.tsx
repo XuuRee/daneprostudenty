@@ -1,72 +1,41 @@
 import React from 'react'
 import '../Static/Menu.css'
-import * as FileSaver from "file-saver";
+import { connect, MapDispatchToProps } from 'react-redux'
+import { setPage } from '../Actions/MenuActions'
 
 type MenuProps = {
-	page: string;
+	page: string
 }
 
 type DispatchMenuProps = {
-  onPageChange: (value: string) => void;
-};
+  onPageChange: (page: string) => void
+}
 
-class Menu extends React.Component<MenuProps & DispatchMenuProps> {
-  state = {
-		submenu: false,	
-  }
+const Menu: React.SFC<MenuProps & DispatchMenuProps> = ({ page, onPageChange }) => {
 
-	handleHomeChange = () => this.props.onPageChange("home")
-  handleAboutChange = () => this.props.onPageChange("about")
-  handleTutorialChange = () => this.props.onPageChange("tutorial")
-  handleTaxationChange = () => this.props.onPageChange("taxation")
-  handleAPIChange = async () => {
-    console.log("Start fetching API...")
-    
-    const form = {
-      name: "Filip",
-      surname: "Valchar"
-    }
+	const handleHomeChange = () => onPageChange("home")
+  const handleTutorialChange = () => onPageChange("tutorial")
+  const handleTaxationChange = () => onPageChange("taxation")
 
-    const response = await fetch('https://api-dps.herokuapp.com/createXLS', {
-      method: 'POST',
-      body: JSON.stringify(form)
-    })
-    .then(response => { return response.arrayBuffer() });
-
-    const file = new Blob([response], { type: "application/octet-stream" }) // , { type: "application/vnd.ms-excel" }
-    FileSaver.saveAs(file, "form.xlsx");
-
-    /*
-    if (response.ok) {
-      console.log(response.formData.toString())
-      console.log("result:")
-      console.log(response.json())
-    } else {
-      console.log("error")
-    }
-    */
-  }
-
-  render () {
-    return (
-      <React.Fragment>
+  return (
+    <React.Fragment>
         <div className="nav">
-          {/* 
-          <img alt="logo" src={logo_url} /> 
-          */}
+          {/* <img alt="logo" src={logo_url} /> */}
           <div className="nav-right">
-				  	<button className={this.props.page === "home" ? "nav-item active" : "nav-item"} onClick={this.handleHomeChange}>Úvod</button>
-            <button className={this.props.page === "tutorial" ? "nav-item active" : "nav-item"} onClick={this.handleTutorialChange}>Návod</button>
-            <button className={this.props.page === "taxation" ? "nav-item active" : "nav-item"} onClick={this.handleTaxationChange}>Formulář</button>
-            {/* 
-            <button className="nav-item" onClick={this.handleAPIChange}>API</button> 
-            <button className="nav-item" onClick={this.handleAboutChange}>O projektu</button>
-            */}
+				  	<button className={"nav-item " + (page === "home" ? 'active' : '')} onClick={handleHomeChange}>Úvod</button>
+            <button className={"nav-item " + (page === "tutorial" ? 'active' : '')} onClick={handleTutorialChange}>Návod</button>
+            <button className={"nav-item " + (page === "taxation" ? 'active' : '')} onClick={handleTaxationChange}>Formulář</button>
           </div>
         </div>
       </React.Fragment>
-    )
-  }
+  )
 }
 
-export default Menu
+const mapDispatchToProps: MapDispatchToProps<DispatchMenuProps, {}> = dispatch => ({
+  onPageChange: page => dispatch(setPage(page))
+})
+
+export default connect(
+  undefined,
+  mapDispatchToProps
+)(Menu)

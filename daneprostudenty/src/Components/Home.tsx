@@ -1,7 +1,17 @@
-import React from 'react';
-import illustration_url from "../Images/schoolbooks-colour.png";
+import React from 'react'
+import illustration_url from "../Images/schoolbooks-colour.png"
+import { MapDispatchToProps, connect } from 'react-redux'
+import { setPage } from '../Actions/MenuActions'
 
-const Home: React.SFC = () => {
+type DispatchMenuProps = {
+  onPageChange: (page: string) => void
+}
+
+const Home: React.SFC<DispatchMenuProps> = ({ onPageChange }) => {
+
+  const handleTutorialChange = () => onPageChange("tutorial")
+  const handleTaxationChange = () => onPageChange("taxation")
+
   return (
     <div className="ui grid">
       <div className="ui seven wide column grid pad-1">
@@ -13,22 +23,19 @@ const Home: React.SFC = () => {
           <br />
           <h1>Potřebuješ pomoc s vyplněním daňového přiznání?</h1>
           <br />
-          <button className="big ui button">Jak na to?</button>
-          <button className="big ui positive button">Vyplnit daňové přiznání</button>
-          {/*
-          <div className="ui buttons">
-            <button className="huge ui button">Jak na to?</button>
-            <div className="or"></div>
-            <button className="huge ui positive button">Save</button>
-          </div>
-          */}
-          {/* 
-          <button className="positive huge ui button">Vyplnit daňové přiznání</button>
-          */}
+          <button className="big ui button" onClick={handleTutorialChange}>Jak na to?</button>
+          <button className="big ui positive button" onClick={handleTaxationChange}>Vyplnit daňové přiznání</button>
         </div>
       </div>
     </div>
-  );
+  )
 }
 
-export default Home;
+const mapDispatchToProps: MapDispatchToProps<DispatchMenuProps, {}> = dispatch => ({
+  onPageChange: page => dispatch(setPage(page))
+})
+
+export default connect(
+  undefined,
+  mapDispatchToProps
+)(Home)
