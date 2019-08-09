@@ -38,44 +38,46 @@ const PersonalForm: React.SFC<PersonalProps & DispatchPersonalProps> = ({
   onEmailChange
 }) => {
 
-  // use only camel case or underscore!
+  /* events */
   const handleNameChange = (name: string) => onNameChange(name)
   const handleNativeSurnameChange = (native_surname: string) => onNativeSurnameChange(native_surname)
   const handleSurnameChange = (surname: string) => onSurnameChange(surname)
   const handleDegreeChange = (degree: string) => onDegreeChange(degree)
-
   const handlePersonalIdChange = (id: string) => onPersonalIdChange(id)
-  
   const handlePhoneNumberChange = (phone_number: string) => onPhoneNumberChange(phone_number)
   const handleEmailChange = (email: string) => onEmailChange(email)
-
   const handleNativeSurnameDescriptionChange = () => 
     description === "nativeSurnameDescription" 
       ? onDescriptionChange(undefined)
       : onDescriptionChange("nativeSurnameDescription")
+  const handleLeaveChange = () => onDescriptionChange(undefined)
 
+  /* props */
   const nameProps = { label: 'Jméno', placeholder: 'Jméno', value: name, size: 4 }
   const nativeSurnameProps = { label: 'Rodné příjmení', placeholder: 'Rodné příjmení', value: native_surname, size: -1 }
   const surnameProps = { label: 'Příjmení', placeholder: 'Příjmení', value: surname, size: -1 }
   const degreeProps = { label: 'Titul', placeholder: 'Titul', value: degree, size: 2 }
-
   const personalIdProps = { label: 'Rodné číslo', placeholder: 'Rodné číslo', value: personal_id, size: 6 }
-
   const phoneNumberProps = { label: 'Telefonní číslo', placeholder: 'Telefonní číslo', value: phone_number, size: -1 }
   const emailProps = { label: 'Email', placeholder: 'Email', value: email, size: -1 }
 
+  /* descriptions */
   const nativeSurnameDescription = 
     <div className="ui info message">
       <div className="header">Rodné příjmení</div>
       <p>Pokud jste se nechali přejmenovat...</p>
     </div>
 
-  // also onBlur change description!
   return (
     <React.Fragment>
       <div className="fields">
         <StringInput {...nameProps} onValueChange={handleNameChange} />
-        <StringInput {...nativeSurnameProps} onDescriptionChange={handleNativeSurnameDescriptionChange} onValueChange={handleNativeSurnameChange} />
+        <StringInput 
+          {...nativeSurnameProps} 
+          onDescriptionChange={handleNativeSurnameDescriptionChange} 
+          onLeaveChange={handleLeaveChange} 
+          onValueChange={handleNativeSurnameChange} 
+        />
         <StringInput {...surnameProps} onValueChange={handleSurnameChange} />
         <StringInput {...degreeProps} onValueChange={handleDegreeChange} />
       </div>

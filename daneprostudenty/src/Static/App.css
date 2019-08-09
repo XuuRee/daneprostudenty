@@ -30,6 +30,19 @@
 	flex: 2;
 }
 
+/* title for section */
+
+.detail {
+	position: relative;
+	right: 6em;
+	top: 4em;
+}
+
+.detail:hover {
+	background-color: lightgrey;
+	cursor: pointer;
+}
+
 /* other */
 
 button:focus {
@@ -49,4 +62,10 @@ button:focus {
 .mar-1 {
 	margin-top: 4em;
 	margin-bottom: 4em;
+}
+
+input[type=number]::-webkit-inner-spin-button, 
+input[type=number]::-webkit-outer-spin-button { 
+  -webkit-appearance: none; 
+  margin: 0; 
 }

@@ -4,17 +4,17 @@ import { convertNumberSizeToWidth } from "../Utils/Convertors"
 type InputProps = {
   label: string
   placeholder: string
-  value: string
+  value: number
   size: number
 }
 
 type DispatchInputProps = {
-  onValueChange: (value: string) => void
+  onValueChange: (value: number) => void
   onDescriptionChange?: () => void
   onLeaveChange?: () => void
 }
 
-class StringInput extends React.Component<InputProps & DispatchInputProps> {
+class NumberInput extends React.Component<InputProps & DispatchInputProps> {
 
   state = {
     current: this.props.value,
@@ -27,7 +27,7 @@ class StringInput extends React.Component<InputProps & DispatchInputProps> {
 
     clearTimeout(this.state.timer)
     
-    this.setState({ current: event.target.value })
+    this.setState({ current: Number(event.target.value) })
     this.setState({ timer: setTimeout(this.handleTriggerValue, 300) })
   }
 
@@ -39,7 +39,7 @@ class StringInput extends React.Component<InputProps & DispatchInputProps> {
       <div className={width + " field"}>
         <label>{this.props.label}</label>
         <input 
-          type="text" 
+          type="number" 
           placeholder={this.props.placeholder} 
           value={this.state.current} 
           onClick={this.props.onDescriptionChange} 
@@ -51,4 +51,4 @@ class StringInput extends React.Component<InputProps & DispatchInputProps> {
   }
 }
 
-export default StringInput
+export default NumberInput
