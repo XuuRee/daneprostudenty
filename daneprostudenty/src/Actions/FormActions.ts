@@ -1,3 +1,5 @@
+import { Children } from "../State/State";
+
 export type SetDescription = {
 	readonly type: "SET_DESCRIPTION"
 	readonly description: string | undefined
@@ -241,8 +243,19 @@ export type SpouseActions =
 
 /* family - children */
 
+export type AddChildren = {
+	readonly type: "ADD_CHILDREN"
+	readonly child: Children
+}
 
-export type FamilyActions = SetFamilyMarried | SetFamilyChildless | SpouseActions
+export const addChildren = (child: Children): AddChildren => ({
+	type: "ADD_CHILDREN",
+	child
+})
+
+export type ChildrenActions = AddChildren 
+
+export type FamilyActions = SetFamilyMarried | SetFamilyChildless | SpouseActions | ChildrenActions
 
 
 /* form actions */

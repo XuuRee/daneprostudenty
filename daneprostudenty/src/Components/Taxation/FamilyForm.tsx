@@ -1,9 +1,10 @@
 import React from 'react'
-import { Family } from '../../State/State'
+import { Family, Children } from '../../State/State'
 import { connect, MapDispatchToProps } from 'react-redux'
-import { setFamilyMarried, setFamilyChildless, setDescription } from '../../Actions/FormActions'
+import { setFamilyMarried, setFamilyChildless, setDescription, addChildren } from '../../Actions/FormActions'
 import SpouseForm from './SpouseForm'
 import ChildrenForm from './ChildrenForm'
+import ChildrenList from './ChildrenList'
 
 type FamilyProps = { 
   description: string | undefined 
@@ -13,6 +14,7 @@ type DispatchFamilyProps = {
   onDescriptionChange: (description: string | undefined) => void
   onMarriedChange: () => void
   onChildlessChange: () => void
+  onAddChildrenChange: (child: Children) => void
 }
 
 const FamilyForm: React.SFC<FamilyProps & DispatchFamilyProps> = ({ 
@@ -24,11 +26,13 @@ const FamilyForm: React.SFC<FamilyProps & DispatchFamilyProps> = ({
   onDescriptionChange,
   onMarriedChange,
   onChildlessChange,
+  onAddChildrenChange
 }) => {
 
   /* events */
 	const handleMarriedChange = () => onMarriedChange()
   const handleChildessChange = () => onChildlessChange()
+  const handleChildrenChange = (child: Children) => onAddChildrenChange(child)
   
   /* props */
 
@@ -54,7 +58,14 @@ const FamilyForm: React.SFC<FamilyProps & DispatchFamilyProps> = ({
           <label>Mám děti.</label>
         </div>
       </div>
-			{!childless && <ChildrenForm />}
+			{
+        !childless && 
+          <div>
+            <h4>3.2. Osobní údaje dětí</h4>
+            <ChildrenList childrenList={children} />
+            <ChildrenForm description={description} onAddChildren={handleChildrenChange} />
+          </div>
+      }
     </React.Fragment>
   )
 }
@@ -62,7 +73,8 @@ const FamilyForm: React.SFC<FamilyProps & DispatchFamilyProps> = ({
 const mapDispatchToProps: MapDispatchToProps<DispatchFamilyProps, {}> = dispatch => ({
   onDescriptionChange: description => dispatch(setDescription(description)),
 	onMarriedChange: () => dispatch(setFamilyMarried()),
-	onChildlessChange: () => dispatch(setFamilyChildless()),
+  onChildlessChange: () => dispatch(setFamilyChildless()),
+  onAddChildrenChange: child => dispatch(addChildren(child)),
 })
 
 export default connect(

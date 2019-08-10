@@ -129,6 +129,12 @@ const form: Reducer<Form, FormActions> = (
         .at("disability")
         .modify(disability => !disability)
 
+    /* family - children */
+    case "ADD_CHILDREN":
+      return deepUpdate(state)
+        .at("family")
+        .at("children")
+        .set(state.family.children.concat(action.child));        
 		default:
       return state
   }
