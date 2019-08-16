@@ -1,4 +1,4 @@
-import State from "../State/State"
+import State, { BankAccount, Income, Office } from "../State/State"
 import { Menu, Form, Personal, Residence, Family, Spouse } from "../State/State"
 
 const menuProps: Menu = {
@@ -39,11 +39,32 @@ const familyProps: Family = {
 	children: [],
 }
 
+const accountProps: BankAccount = {
+	number: '',
+	code: '',
+	name: ''
+}
+
+const officeProps: Office = {
+	region: '',
+	workplace: ''
+}
+
+const incomeProps: Income = {
+	total: 0,
+	insurance: 0,
+	advances: 0,
+	tax: 0
+}
+
 const formProps: Form = { 
 	description: undefined,
 	personal: personalProps,
 	residence: residenceProps,
 	family: familyProps,
+	account: accountProps,
+	office: officeProps,
+	income: incomeProps
 }
 
 const initialState: State = {

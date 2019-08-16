@@ -1,7 +1,7 @@
 import React from 'react'
 import StringInput from '../../Fields/StringInput'
 import { Children } from '../../State/State'
-import NumberInput from '../../Fields/NumberInput';
+import NumberInput from '../../Fields/NumberInput'
 
 type DescriptionProps = {
   description: string | undefined
@@ -28,13 +28,14 @@ class ChildrenForm extends React.Component<DescriptionProps & DispatchChildrenPr
   handleAddChildChange = () => {
     // validate children form
 
-    // check whether object is correct
     const children = {
       name: this.state.ch_name,
       surname: this.state.ch_surname,
       personal_id: this.state.ch_personal_id,
       months: this.state.ch_months
     }
+
+    this.setState({ ch_name: '', ch_surname: '', ch_personal_id: '', ch_months: 0 })
 
     this.props.onAddChildren(children)
   }
@@ -45,24 +46,21 @@ class ChildrenForm extends React.Component<DescriptionProps & DispatchChildrenPr
     const nameProps = { label: 'Jméno', placeholder: 'Jméno', value: this.state.ch_name, size: -1 }
     const surnameProps = { label: 'Příjmení', placeholder: 'Příjmení', value: this.state.ch_surname, size: -1 }
     const personalIdProps = { label: 'Rodné číslo', placeholder: 'Rodné číslo', value: this.state.ch_personal_id, size: -1 }
-    const monthsProps = { label: 'Počet měsíců', placeholder: 'Počet měsíců', value: this.state.ch_months, size: -1 }
+    const monthsProps = { label: 'Počet měsíců', placeholder: 'Počet měsíců', value: this.state.ch_months, size: 2 }
 
     return (
       <React.Fragment>
-      
-      {/* form */}
-      <div className="fields">
-        <StringInput {...nameProps} onValueChange={this.handleNameChange} />
-        <StringInput {...surnameProps} onValueChange={this.handleSurnameChange} />
-        <NumberInput {...monthsProps} onValueChange={this.handleMonthsChange} />
-      </div>
-      <div className="fields">
-        <StringInput {...personalIdProps} onValueChange={this.handlePersonalIdChange} />
-      </div>
-      <button className="ui primary button" onClick={this.handleAddChildChange}>
-        Přidat dítě
-      </button>
-    </React.Fragment>
+        {/* form */}
+        <div className="fields">
+          <StringInput {...nameProps} onValueChange={this.handleNameChange} />
+          <StringInput {...surnameProps} onValueChange={this.handleSurnameChange} />
+          <StringInput {...personalIdProps} onValueChange={this.handlePersonalIdChange} />
+          <NumberInput {...monthsProps} onValueChange={this.handleMonthsChange} />
+        </div>
+        <button className="ui primary button" onClick={this.handleAddChildChange}>
+          Přidat dítě
+        </button>
+      </React.Fragment>
     )
   }
 }

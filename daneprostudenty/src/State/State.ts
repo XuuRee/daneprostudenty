@@ -43,11 +43,33 @@ export type Family = {
 	readonly children: Children[]		// udaje o jednotlivych detech
 }
 
+export type BankAccount = {
+	readonly number: string		// cislo uctu
+	readonly code: string		// kod banky
+	readonly name: string		// jmeno banky
+}
+
+export type Office = {
+	readonly region: string 	// financni urad 
+	readonly workplace: string 	// uzemni pracoviste
+}
+
+export type Income = {
+	readonly total: number		// celkovy prijem
+	readonly insurance: number		// zdravotni a socialni pojisteni
+	readonly advances: number		// srazene zalohy
+	readonly tax: number 		// srazena dan	
+}
+
 export type Form = {
 	readonly description: string | undefined		// popis pro konkretni vstup 
 	readonly personal: Personal		// osobni udaje
 	readonly residence: Residence		// bydliste
 	readonly family: Family		// rodina
+	readonly account: BankAccount	 // bankovni ucet
+	readonly office: Office // financni urad
+	readonly income: Income // prijem
+	// readonly sales: Sales //	slevy na dani a nezdanitelna cast dane
 }
 
 export type State = {

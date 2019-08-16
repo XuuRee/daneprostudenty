@@ -253,9 +253,71 @@ export const addChildren = (child: Children): AddChildren => ({
 	child
 })
 
+/* !!! TODO - remove children */
+
 export type ChildrenActions = AddChildren 
 
 export type FamilyActions = SetFamilyMarried | SetFamilyChildless | SpouseActions | ChildrenActions
+
+
+/* account actions */
+
+export type SetAccountNumber = {
+	readonly type: "SET_ACCOUNT_NUMBER"
+	readonly number: string
+}
+
+export const setAccountNumber = (number: string): SetAccountNumber => ({
+	type: "SET_ACCOUNT_NUMBER",
+	number
+})
+
+export type SetAccountCode = {
+	readonly type: "SET_ACCOUNT_CODE"
+	readonly code: string
+}
+
+export const setAccountCode = (code: string): SetAccountCode => ({
+	type: "SET_ACCOUNT_CODE",
+	code
+})
+
+export type SetBankName = {
+	readonly type: "SET_BANK_NAME"
+	readonly name: string
+}
+
+export const setBankName = (name: string): SetBankName => ({
+	type: "SET_BANK_NAME",
+	name
+})
+
+export type AccountActions = SetAccountNumber | SetAccountCode | SetBankName
+
+
+/* office actions */
+
+export type SetOfficeRegion = {
+	readonly type: "SET_OFFICE_REGION"
+	readonly region: string
+}
+
+export const setOfficeRegion = (region: string): SetOfficeRegion => ({
+	type: "SET_OFFICE_REGION",
+	region
+})
+
+export type SetOfficeWorkplace = {
+	readonly type: "SET_OFFICE_WORKPLACE"
+	readonly workplace: string
+}
+
+export const setOfficeWorkplace = (workplace: string): SetOfficeWorkplace => ({
+	type: "SET_OFFICE_WORKPLACE",
+	workplace
+})
+
+export type OfficeActions = SetOfficeRegion | SetOfficeWorkplace
 
 
 /* form actions */
@@ -264,4 +326,6 @@ export type FormActions =
 	SetDescription | 
 	PersonalActions | 
 	ResidenceActions | 
-	FamilyActions
+	FamilyActions | 
+	AccountActions |
+	OfficeActions

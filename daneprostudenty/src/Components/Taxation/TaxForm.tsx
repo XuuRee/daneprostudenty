@@ -4,6 +4,8 @@ import { Form } from '../../State/State'
 import PersonalForm from './PersonalForm';
 import ResidenceForm from './ResidenceForm';
 import FamilyForm from './FamilyForm';
+import AccountForm from './AccountForm';
+import OfficeForm from './OfficeForm';
   
 type DispatchFormProps = {
     onSubmitForm: () => void
@@ -15,11 +17,15 @@ class TaxForm extends React.Component<Form> {
     personal_content: true,
     residence_content: true,
     family_content: true,
+    account_content: true,
+    office_content: true,
   }
 
   handlePersonalContentChange = () => this.setState({ personal_content: !this.state.personal_content })
   handleResidenceContentChange = () => this.setState({ residence_content: !this.state.residence_content })
   handleFamilyContentChange = () => this.setState({ family_content: !this.state.family_content })
+  handleAccountContentChange = () => this.setState({ account_content: !this.state.account_content })
+  handleOfficeContentChange = () => this.setState({ office_content: !this.state.office_content })
 
   handleSubmitForm = () => {
     console.log("[DEBUG] Submit event =>")
@@ -91,6 +97,18 @@ class TaxForm extends React.Component<Form> {
               </button>
               <h4>3. Rodina</h4>
               {this.state.family_content && <FamilyForm description={this.props.description} {...this.props.family} />}
+              {/* bank account */}
+              <button className="ui label detail" onClick={this.handleAccountContentChange}>
+                {this.state.account_content ? "Skrýt" : "Otevřít"}
+              </button>
+              <h4>4. Bankovní spojení</h4>
+              {this.state.account_content && <AccountForm {...this.props.account} />}
+              {/* tax office */}
+              <button className="ui label detail" onClick={this.handleOfficeContentChange}>
+                {this.state.office_content ? "Skrýt" : "Otevřít"}
+              </button>
+              <h4>5. Finanční úřad</h4>
+              {this.state.office_content && <OfficeForm description={this.props.description} {...this.props.office} />}
               {/* submit */}
               <br />
               <button className="positive ui button" onClick={this.handleSubmitForm}>Odeslat formulář</button>

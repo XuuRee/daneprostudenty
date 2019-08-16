@@ -134,7 +134,37 @@ const form: Reducer<Form, FormActions> = (
       return deepUpdate(state)
         .at("family")
         .at("children")
-        .set(state.family.children.concat(action.child));        
+        .set(state.family.children.concat(action.child));
+        
+    /* bank account */
+    case "SET_ACCOUNT_NUMBER":
+      return deepUpdate(state)
+        .at("account")
+        .at("number")
+        .set(action.number)
+    case "SET_ACCOUNT_CODE":
+      return deepUpdate(state)
+        .at("account")
+        .at("code")
+        .set(action.code)
+    case "SET_BANK_NAME":
+      return deepUpdate(state)
+        .at("account")
+        .at("name")
+        .set(action.name)
+
+    /* tax office */
+    case "SET_OFFICE_REGION":
+      return deepUpdate(state)
+        .at("office")
+        .at("region")
+        .set(action.region)
+    case "SET_OFFICE_WORKPLACE":
+      return deepUpdate(state)
+        .at("office")
+        .at("workplace")
+        .set(action.workplace)
+
 		default:
       return state
   }

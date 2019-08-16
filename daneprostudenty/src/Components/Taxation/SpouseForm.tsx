@@ -55,7 +55,7 @@ const SpouseForm: React.SFC<SpouseProps & DispatchSpouseProps> = ({
   description === "monthsDescription" 
     ? onDescriptionChange(undefined)
     : onDescriptionChange("monthsDescription")
-const handleLeaveChange = () => onDescriptionChange(undefined)
+  const handleLeaveChange = () => onDescriptionChange(undefined)
 
   /* props */
   const nameProps = { label: 'Jméno', placeholder: 'Jméno', value: name, size: -1 }

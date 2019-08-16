@@ -21,6 +21,13 @@ class StringInput extends React.Component<InputProps & DispatchInputProps> {
     timer: undefined
   }
 
+  // method will be deprecated!
+  componentWillReceiveProps(updated: InputProps) {
+    if (updated.value !== this.state.current) {
+      this.setState({ current: updated.value });
+    }
+  }
+
   handleTriggerValue = () => this.props.onValueChange(this.state.current)
 
   handleValueChange = (event: React.ChangeEvent<HTMLInputElement>) => {
