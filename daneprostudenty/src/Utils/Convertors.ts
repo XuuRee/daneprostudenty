@@ -1,4 +1,4 @@
-import bankDict from "./Dictionary";
+import { bankDict } from "./Dictionary"
 
 export const convertNumberSizeToWidth = (size: number): string => {
   switch (size) {
@@ -19,7 +19,7 @@ export const convertNumberSizeToWidth = (size: number): string => {
 		default:
 			return ''
 	}
-};
+}
 
 export const convertBankAccountProperties = (input: string): { number: string, code: string, name: string } => {
 	const accountParts = input.split('/');

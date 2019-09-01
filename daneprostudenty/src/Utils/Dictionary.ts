@@ -2,8 +2,13 @@ type Dictionary = {
 	[key: string]: string;
 }
 
-const bankDict: Dictionary = {
+export const bankDict: Dictionary = {
 	'3030': 'AirBank'
 }
+export const regionDict: Dictionary = {
+	'Jihomoravský kraj': '3000',
+	'Olomoucký kraj': '3100'
+	// a tak dale...
+}
 
-export default bankDict
+// export default bankDict
