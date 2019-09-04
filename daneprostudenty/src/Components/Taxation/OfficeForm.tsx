@@ -81,8 +81,10 @@ const getWorkplaces = (region: string) => {
 			return []
 		case 'Moravskoslezský kraj':
 			return []
+		case '':
+			return []
 		default:
-			console.error("Error")
+			console.error("Error - ")
 			return []
 	}	
 }
@@ -107,11 +109,18 @@ const OfficeForm: React.SFC<OfficeProps & DispatchOfficeProps> = ({
 
 	const workplaces = getWorkplaces(region)
 
+	const workplacesInput = region !== '' 
+		?	<select className="ui four wide field dropdown" value={workplace} onChange={handleWorkplaceChange}>
+				<option value="" disabled hidden>Zvol uzemní pracoviště...</option>
+				{workplaces.map(place => <option>{place}</option>)}
+			</select>
+		: null;
+
   return (
     <React.Fragment>
 			{regionDescription}
 			<select className="ui four wide field dropdown" value={region} onChange={handleRegionChange}>
-				<option value="" disabled hidden>Zvol si kraj...</option>
+				<option value="" disabled hidden>Zvol kraj...</option>
 				<option>Hlavní město Praha</option>
   			<option>Středočeský kraj</option>
 				<option>Jihočeský kraj</option>
@@ -127,10 +136,7 @@ const OfficeForm: React.SFC<OfficeProps & DispatchOfficeProps> = ({
 				<option>Zlínský kraj</option>
 				<option>Moravskoslezský kraj</option>
 			</select>
-			<select className="ui four wide field dropdown" value={workplace} onChange={handleWorkplaceChange}>
-				<option value="" disabled hidden>Zvol si uzemní pracoviště...</option>
-				{workplaces.map(place => <option>{place}</option>)}
-			</select>
+			{workplacesInput}
     </React.Fragment>
   )
 }

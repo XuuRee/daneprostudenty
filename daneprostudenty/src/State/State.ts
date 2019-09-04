@@ -55,10 +55,25 @@ export type Office = {
 }
 
 export type Income = {
-	readonly total: number		// celkovy prijem
-	readonly insurance: number		// zdravotni a socialni pojisteni
-	readonly advances: number		// srazene zalohy
-	readonly tax: number 		// srazena dan	
+	readonly total: string		// celkovy prijem
+	readonly insurance: string		// zdravotni a socialni pojisteni
+	readonly advances: string		// srazene zalohy
+	readonly tax: string 		// srazena dan	
+}
+
+export type Markdown = {
+	readonly disability: string		// pocet mesicu invalidity
+	readonly extended_disability: string		// pocet mesicu rozsirene invalidity
+	readonly benefit_card: string		// pocet mesicu jako ztp
+	readonly student: string		// pocet mesicu jako student
+	readonly children_placement: string		// umisteni ditete
+	readonly gifts: string 		// obdrzene dary
+	readonly interests: string		// uroky
+	readonly months_interests: string		// pocet mesicu v kterych se platily uroky
+	readonly pension_insurance: string		// penzijni pojisteni
+	readonly private_insurance: string		// soukrome pojisteni
+	readonly contributions: string		// odborove prispevky
+	readonly exams_payment: string		// uhrada za zkousky
 }
 
 export type Form = {
@@ -69,7 +84,7 @@ export type Form = {
 	readonly account: BankAccount	 // bankovni ucet
 	readonly office: Office // financni urad
 	readonly income: Income // prijem
-	// readonly sales: Sales //	slevy na dani a nezdanitelna cast dane
+	readonly markdown: Markdown //	slevy na dani a nezdanitelna cast dane
 }
 
 export type State = {

@@ -1,4 +1,4 @@
-import State, { BankAccount, Income, Office } from "../State/State"
+import State, { BankAccount, Income, Office, Markdown } from "../State/State"
 import { Menu, Form, Personal, Residence, Family, Spouse } from "../State/State"
 
 const menuProps: Menu = {
@@ -51,10 +51,25 @@ const officeProps: Office = {
 }
 
 const incomeProps: Income = {
-	total: 0,
-	insurance: 0,
-	advances: 0,
-	tax: 0
+	total: '',
+	insurance: '',
+	advances: '',
+	tax: ''
+}
+
+const markdownProps: Markdown = {
+	disability: '',
+	extended_disability: '',
+	benefit_card: '',
+	student: '',
+	children_placement: '',
+	gifts: '',
+	interests: '',
+	months_interests: '',
+	pension_insurance: '',
+	private_insurance: '',
+	contributions: '',
+	exams_payment: '',
 }
 
 const formProps: Form = { 
@@ -64,7 +79,8 @@ const formProps: Form = {
 	family: familyProps,
 	account: accountProps,
 	office: officeProps,
-	income: incomeProps
+	income: incomeProps,
+	markdown: markdownProps,
 }
 
 const initialState: State = {

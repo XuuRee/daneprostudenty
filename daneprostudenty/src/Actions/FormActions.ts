@@ -320,6 +320,188 @@ export const setOfficeWorkplace = (workplace: string): SetOfficeWorkplace => ({
 export type OfficeActions = SetOfficeRegion | SetOfficeWorkplace
 
 
+/* income actions */
+
+export type SetIncomeTotal = {
+	readonly type: "SET_INCOME_TOTAL"
+	readonly total: string
+}
+
+export const setIncomeTotal = (total: string): SetIncomeTotal => ({
+	type: "SET_INCOME_TOTAL",
+	total
+})
+
+export type SetIncomeInsurance = {
+	readonly type: "SET_INCOME_INSURANCE"
+	readonly insurance: string
+}
+
+export const setIncomeInsurance = (insurance: string): SetIncomeInsurance => ({
+	type: "SET_INCOME_INSURANCE",
+	insurance
+})
+
+export type SetIncomeAdvances = {
+	readonly type: "SET_INCOME_ADVANCES"
+	readonly advances: string
+}
+
+export const setIncomeAdvances = (advances: string): SetIncomeAdvances => ({
+	type: "SET_INCOME_ADVANCES",
+	advances
+})
+
+export type SetIncomeTax = {
+	readonly type: "SET_INCOME_TAX"
+	readonly tax: string
+}
+
+export const setIncomeTax = (tax: string): SetIncomeTax => ({
+	type: "SET_INCOME_TAX",
+	tax
+})
+
+export type IncomeActions = SetIncomeTotal | SetIncomeInsurance | SetIncomeAdvances | SetIncomeTax
+
+
+/* markdown actions */
+
+export type SetMarkdownDisability = {
+	readonly type: "SET_MARKDOWN_DISABILITY"
+	readonly disability: string
+}
+
+export const setMarkdownDisability = (disability: string): SetMarkdownDisability => ({
+	type: "SET_MARKDOWN_DISABILITY",
+	disability
+})
+
+export type SetMarkdownExtendedDisability = {
+	readonly type: "SET_MARKDOWN_EXTENDED_DISABILITY"
+	readonly extended_disability: string
+}
+
+export const setMarkdownExtendedDisability = (extended_disability: string): SetMarkdownExtendedDisability => ({
+	type: "SET_MARKDOWN_EXTENDED_DISABILITY",
+	extended_disability
+})
+
+export type SetMarkdownBenefitCard = {
+	readonly type: "SET_MARKDOWN_BENEFIT_CARD"
+	readonly benefit_card: string
+}
+
+export const setMarkdownBenefitCard = (benefit_card: string): SetMarkdownBenefitCard => ({
+	type: "SET_MARKDOWN_BENEFIT_CARD",
+	benefit_card
+})
+
+export type SetMarkdownStudent = {
+	readonly type: "SET_MARKDOWN_STUDENT"
+	readonly student: string
+}
+
+export const setMarkdownStudent = (student: string): SetMarkdownStudent => ({
+	type: "SET_MARKDOWN_STUDENT",
+	student
+})
+
+export type SetMarkdownChildrenPlacement = {
+	readonly type: "SET_MARKDOWN_CHILDREN_PLACEMENT"
+	readonly children_placement: string
+}
+
+export const setMarkdownChildrenPlacement = (children_placement: string): SetMarkdownChildrenPlacement => ({
+	type: "SET_MARKDOWN_CHILDREN_PLACEMENT",
+	children_placement
+})
+
+export type SetMarkdownGifts = {
+	readonly type: "SET_MARKDOWN_GIFTS"
+	readonly gifts: string
+}
+
+export const setMarkdownGifts = (gifts: string): SetMarkdownGifts => ({
+	type: "SET_MARKDOWN_GIFTS",
+	gifts
+})
+
+export type SetMarkdownInterests = {
+	readonly type: "SET_MARKDOWN_INTERESTS"
+	readonly interests: string
+}
+
+export const setMarkdownInterests = (interests: string): SetMarkdownInterests => ({
+	type: "SET_MARKDOWN_INTERESTS",
+	interests
+})
+
+export type SetMarkdownMonthsInterests = {
+	readonly type: "SET_MARKDOWN_MONTHS_INTERESTS"
+	readonly months_interests: string
+}
+
+export const setMarkdownMonthsInterests = (months_interests: string): SetMarkdownMonthsInterests => ({
+	type: "SET_MARKDOWN_MONTHS_INTERESTS",
+	months_interests
+})
+
+export type SetMarkdownPensionInsurance = {
+	readonly type: "SET_MARKDOWN_PENSION_INSURANCE"
+	readonly pension_insurance: string
+}
+
+export const setMarkdownPensionInsurance = (pension_insurance: string): SetMarkdownPensionInsurance => ({
+	type: "SET_MARKDOWN_PENSION_INSURANCE",
+	pension_insurance
+})
+
+export type SetMarkdownPrivateInsurance = {
+	readonly type: "SET_MARKDOWN_PRIVATE_INSURANCE"
+	readonly private_insurance: string
+}
+
+export const setMarkdownPrivateInsurance = (private_insurance: string): SetMarkdownPrivateInsurance => ({
+	type: "SET_MARKDOWN_PRIVATE_INSURANCE",
+	private_insurance
+})
+
+export type SetMarkdownContributions = {
+	readonly type: "SET_MARKDOWN_CONTRIBUTIONS"
+	readonly contributions: string
+}
+
+export const setMarkdownContributions = (contributions: string): SetMarkdownContributions => ({
+	type: "SET_MARKDOWN_CONTRIBUTIONS",
+	contributions
+})
+
+export type SetMarkdownExamsPayment = {
+	readonly type: "SET_MARKDOWN_EXAMS_PAYMENT"
+	readonly exams_payment: string
+}
+
+export const setMarkdownExamsPayment = (exams_payment: string): SetMarkdownExamsPayment => ({
+	type: "SET_MARKDOWN_EXAMS_PAYMENT",
+	exams_payment
+})
+
+export type MarkdownActions = 
+	SetMarkdownDisability | 
+	SetMarkdownExtendedDisability |
+	SetMarkdownBenefitCard |
+	SetMarkdownStudent |
+	SetMarkdownChildrenPlacement |
+	SetMarkdownGifts |
+	SetMarkdownInterests |
+	SetMarkdownMonthsInterests |
+	SetMarkdownPensionInsurance |
+	SetMarkdownPrivateInsurance |
+	SetMarkdownContributions |
+	SetMarkdownExamsPayment
+
+
 /* form actions */
 
 export type FormActions = 
@@ -328,4 +510,6 @@ export type FormActions =
 	ResidenceActions | 
 	FamilyActions | 
 	AccountActions |
-	OfficeActions
+	OfficeActions |
+	IncomeActions |
+	MarkdownActions

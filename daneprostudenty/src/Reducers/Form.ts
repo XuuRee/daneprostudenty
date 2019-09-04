@@ -165,6 +165,90 @@ const form: Reducer<Form, FormActions> = (
         .at("workplace")
         .set(action.workplace)
 
+    /* income */
+    case "SET_INCOME_TOTAL":
+      return deepUpdate(state)
+        .at("income")
+        .at("total")
+        .set(action.total)
+    case "SET_INCOME_INSURANCE":
+      return deepUpdate(state)
+        .at("income")
+        .at("insurance")
+        .set(action.insurance)
+    case "SET_INCOME_ADVANCES":
+      return deepUpdate(state)
+        .at("income")
+        .at("advances")
+        .set(action.advances)
+    case "SET_INCOME_TAX":
+      return deepUpdate(state)
+        .at("income")
+        .at("tax")
+        .set(action.tax)
+
+     /* markdown */
+     case "SET_MARKDOWN_DISABILITY":
+      return deepUpdate(state)
+        .at("markdown")
+        .at("disability")
+        .set(action.disability)
+    case "SET_MARKDOWN_EXTENDED_DISABILITY":
+      return deepUpdate(state)
+        .at("markdown")
+        .at("extended_disability")
+        .set(action.extended_disability)
+    case "SET_MARKDOWN_BENEFIT_CARD":
+      return deepUpdate(state)
+        .at("markdown")
+        .at("benefit_card")
+        .set(action.benefit_card)
+    case "SET_MARKDOWN_STUDENT":
+      return deepUpdate(state)
+        .at("markdown")
+        .at("student")
+        .set(action.student)
+    case "SET_MARKDOWN_CHILDREN_PLACEMENT":
+      return deepUpdate(state)
+        .at("markdown")
+        .at("children_placement")
+        .set(action.children_placement)
+    case "SET_MARKDOWN_GIFTS":
+      return deepUpdate(state)
+        .at("markdown")
+        .at("gifts")
+        .set(action.gifts)
+    case "SET_MARKDOWN_INTERESTS":
+      return deepUpdate(state)
+        .at("markdown")
+        .at("interests")
+        .set(action.interests)
+    case "SET_MARKDOWN_MONTHS_INTERESTS":
+      return deepUpdate(state)
+        .at("markdown")
+        .at("months_interests")
+        .set(action.months_interests)
+    case "SET_MARKDOWN_PENSION_INSURANCE":
+      return deepUpdate(state)
+        .at("markdown")
+        .at("pension_insurance")
+        .set(action.pension_insurance)
+    case "SET_MARKDOWN_PRIVATE_INSURANCE":
+      return deepUpdate(state)
+        .at("markdown")
+        .at("private_insurance")
+        .set(action.private_insurance)
+    case "SET_MARKDOWN_CONTRIBUTIONS":
+      return deepUpdate(state)
+        .at("markdown")
+        .at("contributions")
+        .set(action.contributions)
+    case "SET_MARKDOWN_EXAMS_PAYMENT":
+      return deepUpdate(state)
+        .at("markdown")
+        .at("exams_payment")
+        .set(action.exams_payment)
+    
 		default:
       return state
   }
