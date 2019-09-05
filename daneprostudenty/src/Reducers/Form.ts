@@ -157,12 +157,12 @@ const form: Reducer<Form, FormActions> = (
     case "SET_OFFICE_REGION":
       return deepUpdate(state)
         .at("office")
-        .at("region")
+        .at("region_code")
         .set(action.region)
     case "SET_OFFICE_WORKPLACE":
       return deepUpdate(state)
         .at("office")
-        .at("workplace")
+        .at("workplace_code")
         .set(action.workplace)
 
     /* income */

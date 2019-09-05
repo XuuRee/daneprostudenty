@@ -28,7 +28,7 @@ const App: React.SFC<AppProps> = ({ menu, form }) => {
       content = <TaxForm {...form} />
       break
     default:
-      console.error("Error - switch in App.tsx is not consistent!")
+      console.error("ERROR_01 [switch in App.tsx is not consistent]")
   }
 
   return (

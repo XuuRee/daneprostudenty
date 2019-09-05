@@ -46,8 +46,8 @@ const accountProps: BankAccount = {
 }
 
 const officeProps: Office = {
-	region: '',
-	workplace: ''
+	region_code: '',
+	workplace_code: ''
 }
 
 const incomeProps: Income = {

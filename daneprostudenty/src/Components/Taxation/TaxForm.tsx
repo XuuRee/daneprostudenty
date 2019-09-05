@@ -83,8 +83,8 @@ class TaxForm extends React.Component<Form> {
 
     /* office */
     console.log("Office =>")
-    console.log(this.props.office.region)
-    console.log(this.props.office.workplace)
+    console.log(this.props.office.region_code)
+    console.log(this.props.office.workplace_code)
     
     /* income */
     console.log("Income =>")
@@ -121,7 +121,7 @@ class TaxForm extends React.Component<Form> {
             <div className="ui icon message">
               <i className="cz flag" style={{ marginRight: "1em" }} />    
               <div className="content">
-                <p>Tento formuář je určen pouze pro osoby s občanstvím České republiky. Děkujeme za pochopení.</p>
+                <p>Tento formulář je určen pouze pro osoby s občanstvím České republiky. Děkujeme za pochopení.</p>
               </div>
             </div>
             <div className="ui icon message">

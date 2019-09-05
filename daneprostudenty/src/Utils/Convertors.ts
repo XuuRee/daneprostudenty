@@ -1,4 +1,4 @@
-import { bankDict } from "./Dictionary"
+import { bankDict } from "./Dictionaries"
 
 export const convertNumberSizeToWidth = (size: number): string => {
   switch (size) {

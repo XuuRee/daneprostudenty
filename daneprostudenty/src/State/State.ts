@@ -50,8 +50,8 @@ export type BankAccount = {
 }
 
 export type Office = {
-	readonly region: string 	// financni urad 
-	readonly workplace: string 	// uzemni pracoviste
+	readonly region_code: string 	// financni urad 
+	readonly workplace_code: string 	// uzemni pracoviste
 }
 
 export type Income = {

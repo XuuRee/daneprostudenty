@@ -2,6 +2,83 @@ import React from 'react'
 import { Office } from '../../State/State'
 import { connect, MapDispatchToProps } from 'react-redux'
 import { setOfficeRegion, setOfficeWorkplace } from '../../Actions/FormActions'
+import { 
+	regionDict, 
+	jihoceskyKrajDict, 
+	emptyDict, 
+	hlavniMestoPrahaDict, 
+	stredoceskyKrajDict, 
+	Dictionary,
+	plzenskyKrajDict,
+	karlovarskyKrajDict,
+	usteckyKrajDict,
+	libereckyKrajDict,
+	kralovehradeckyKrajDict,
+	pardubickyKrajDict,
+	krajVyoscinaDict,
+	jihomoravskyKrajDict,
+	olomouckyKrajDict,
+	moravskoslezskyKrajDict,
+	zlinskyKrajDict
+} from '../../Utils/Dictionaries';
+
+
+/* helper functions for office form */
+
+const getWorkplaces = (region_code: string) => {
+	switch (region_code) {
+		case '2000':
+			return hlavniMestoPrahaDict
+		case '2100':
+			return stredoceskyKrajDict
+		case '2200':
+			return jihoceskyKrajDict
+		case '2300':
+			return plzenskyKrajDict
+		case '2400':
+			return karlovarskyKrajDict
+		case '2500':
+			return usteckyKrajDict
+		case '2600':
+			return libereckyKrajDict
+		case '2700':
+			return kralovehradeckyKrajDict
+		case '2800':
+			return pardubickyKrajDict
+		case '2900':
+			return krajVyoscinaDict
+		case '3000':
+			return jihomoravskyKrajDict
+		case '3100':
+			return olomouckyKrajDict
+		case '3200':
+			return moravskoslezskyKrajDict
+		case '3300':
+			return zlinskyKrajDict
+		case '':
+			return emptyDict
+		default:
+			console.error("ERROR_02 [switch in OfficeForm.tsx is not consistent]")
+			return emptyDict
+	}	
+}
+
+const getNameByCode = (dict: Dictionary, code: string) => {
+	let reversed: Dictionary = {}
+
+	// reverse values and ids and save result to the new dictionary
+	Object.entries(dict).map(([id, value]) => reversed[value] = id)
+
+	// return empty string if code is undefined
+	if (reversed[code] === undefined) {
+		return ''
+	}
+
+	return reversed[code]
+}
+
+
+/* office form component */
 
 type OfficeProps = { 
   description: string | undefined 
@@ -12,129 +89,47 @@ type DispatchOfficeProps = {
 	onWorkplaceChange: (workplace: string) => void
 }
 
-const getWorkplaces = (region: string) => {
-	switch (region) {
-		case 'Hlavní město Praha':
-			return [
-				'Praha 1', 
-				'Praha 2', 
-				'Praha 3', 
-				'Praha 4', 
-				'Praha 5', 
-				'Praha 6', 
-				'Praha 7', 
-				'Praha 8', 
-				'Praha 9', 
-				'Praha 10', 
-				'Praha - Jižní město', 
-				'Praha - Modřany'
-			]
-		case 'Středočeský kraj':
-			return [
-				'Praha - Východ', 
-				'Praha Západ', 
-				'Benešov', 
-				'Beroun', 
-				'Brandýs N.L. - ST.BOL.	', 
-				'Čáslav', 
-				'Český brod', 
-				'Dobříš', 
-				'Hořovice', 
-				'Kladno', 
-				'Kolín', 
-				'Kralupy nad Vltavou',
-				'Kutná hora',
-				'Mělník',
-				'Mladá Boleslav',
-				'Mnichovo hradiště',
-				'Neratovice',
-				'Nymburk',
-				'Poděbrady',
-				'Příbram',
-				'Říčany',
-				'Sedlčany',
-				'Slaný',
-				'Vlašim',
-				'Votice',
-			]
-		case 'Jihočeský kraj':
-			return []
-		case 'Plzeňský kraj':
-			return []
-		case 'Karlovarský kraj':
-			return []
-		case 'Ústecký kraj':
-			return []
-		case 'Liberecký kraj':
-			return []
-		case 'Kralovehradecký kraj':
-			return []
-		case 'Pardubický kraj':
-			return []
-		case 'Kraj Vysočina':
-			return []
-		case 'Jihomoravský kraj':
-			return []
-		case 'Olomoucký kraj':
-			return []
-		case 'Zlínský kraj':
-			return []
-		case 'Moravskoslezský kraj':
-			return []
-		case '':
-			return []
-		default:
-			console.error("Error - ")
-			return []
-	}	
-}
-
 const OfficeForm: React.SFC<OfficeProps & DispatchOfficeProps> = ({ 
 	description, 
-	region, 
-	workplace, 
+	region_code, 
+	workplace_code, 
 	onRegionChange, 
 	onWorkplaceChange 
 }) => {
-
-	const handleRegionChange = (region: React.ChangeEvent<HTMLSelectElement>) => onRegionChange(region.target.value)
-
-	const handleWorkplaceChange = (workplace: React.ChangeEvent<HTMLSelectElement>) => onWorkplaceChange(workplace.target.value)
-
 	const regionDescription = 
 		<div className="ui info message">
 			<div className="header">Pozor!</div>
-			<p>Podstatné je tvé trvalé bydliště.</p>
+			<p>
+				- podstatné je tvé trvalé bydliště.<br />
+				- pokud si nejsi jistý, jaké územní pracoviště máš vyplnit, můžeš využít <b><a href="https://www.financnisprava.cz/cs/financni-sprava/organy-financni-spravy/uzemni-pracoviste/vyhledavani-up" target="_blank" rel="noopener noreferrer">aplikaci</a></b> finanční správy. Jednoduše zadáš své PSČ a dozvíš se, jaký úřad máš vyplnit do svého formuláře.
+			</p>
 		</div>
 
-	const workplaces = getWorkplaces(region)
+	const workplacesDict = getWorkplaces(region_code)
+
+	const handleRegionChange = (region: React.ChangeEvent<HTMLSelectElement>) => {
+		onRegionChange(regionDict[region.target.value])
+		onWorkplaceChange('')	// if region is changed, set workplace as not selected 
+	}
+
+	const handleWorkplaceChange = (workplace: React.ChangeEvent<HTMLSelectElement>) => onWorkplaceChange(workplacesDict[workplace.target.value])
+
+	const region = getNameByCode(regionDict, region_code)
+	const workplace = getNameByCode(workplacesDict, workplace_code)
 
 	const workplacesInput = region !== '' 
 		?	<select className="ui four wide field dropdown" value={workplace} onChange={handleWorkplaceChange}>
 				<option value="" disabled hidden>Zvol uzemní pracoviště...</option>
-				{workplaces.map(place => <option>{place}</option>)}
+				{Object.entries(workplacesDict).map(([place, code]) => <option key={code}>{place}</option>)}
 			</select>
-		: null;
+		: null
 
   return (
     <React.Fragment>
 			{regionDescription}
 			<select className="ui four wide field dropdown" value={region} onChange={handleRegionChange}>
 				<option value="" disabled hidden>Zvol kraj...</option>
-				<option>Hlavní město Praha</option>
-  			<option>Středočeský kraj</option>
-				<option>Jihočeský kraj</option>
-				<option>Plzeňský kraj</option>
-				<option>Karlovarský kraj</option>
-				<option>Ústecký kraj</option>
-				<option>Liberecký kraj</option>
-				<option>Královéhradecký kraj</option>
-				<option>Pardubický kraj</option>
-				<option>Kraj Vysočina</option>
-				<option>Jihomoravský kraj</option>
-				<option>Olomoucký kraj</option>
-				<option>Zlínský kraj</option>
-				<option>Moravskoslezský kraj</option>
+				{Object.entries(regionDict).map(([region, code]) => <option key={code}>{region}</option>)}
 			</select>
 			{workplacesInput}
     </React.Fragment>
