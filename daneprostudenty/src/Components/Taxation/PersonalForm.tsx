@@ -8,6 +8,10 @@ type PersonalProps = {
   description: string | undefined 
 } & Personal
 
+type VerificationFormProps = {
+  onVerificationForm: () => void
+}
+
 type DispatchPersonalProps = {
   onDescriptionChange: (description: string | undefined) => void
   onNameChange: (name: string) => void
@@ -19,7 +23,7 @@ type DispatchPersonalProps = {
   onEmailChange: (email: string) => void
 }
 
-const PersonalForm: React.SFC<PersonalProps & DispatchPersonalProps> = ({ 
+const PersonalForm: React.SFC<PersonalProps & DispatchPersonalProps & VerificationFormProps> = ({ 
   description, 
   name, 
   native_surname, 
@@ -35,17 +39,33 @@ const PersonalForm: React.SFC<PersonalProps & DispatchPersonalProps> = ({
   onDegreeChange,
   onPersonalIdChange,
   onPhoneNumberChange,
-  onEmailChange
+  onEmailChange,
+  onVerificationForm
 }) => {
 
   /* events */
-  const handleNameChange = (name: string) => onNameChange(name)
+  const handleNameChange = (name: string) => {
+    onNameChange(name)
+    onVerificationForm()
+  }
   const handleNativeSurnameChange = (native_surname: string) => onNativeSurnameChange(native_surname)
-  const handleSurnameChange = (surname: string) => onSurnameChange(surname)
+  const handleSurnameChange = (surname: string) => {
+    onSurnameChange(surname)
+    onVerificationForm()
+  }
   const handleDegreeChange = (degree: string) => onDegreeChange(degree)
-  const handlePersonalIdChange = (id: string) => onPersonalIdChange(id)
-  const handlePhoneNumberChange = (phone_number: string) => onPhoneNumberChange(phone_number)
-  const handleEmailChange = (email: string) => onEmailChange(email)
+  const handlePersonalIdChange = (id: string) => {
+    onPersonalIdChange(id)
+    onVerificationForm()
+  }
+  const handlePhoneNumberChange = (phone_number: string) => {
+    onPhoneNumberChange(phone_number)
+    onVerificationForm()
+  }
+  const handleEmailChange = (email: string) => {
+    onEmailChange(email)
+    onVerificationForm()
+  }
   const handleNativeSurnameDescriptionChange = () => 
     description === "nativeSurnameDescription" 
       ? onDescriptionChange(undefined)

@@ -1,3 +1,14 @@
+export const verifyForm = (...inputs: any): 'success' | 'failure' => {
+	// verify selected inputs
+	for (let index = 0; index < inputs.length; index++) {
+		if (typeof inputs[index] === 'string' && inputs[index] === '') {
+			return 'failure'
+		}
+	}
+
+	return 'success'
+}
+
 export const bankAccountVerification = (input: string): boolean => {
 	const accountParts = input.split('/');
 

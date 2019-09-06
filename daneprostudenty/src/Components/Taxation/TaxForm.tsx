@@ -8,6 +8,7 @@ import AccountForm from './AccountForm';
 import OfficeForm from './OfficeForm';
 import IncomeForm from './IncomeForm';
 import MarkdownForm from './MarkdownForm';
+import { verifyForm } from '../../Utils/Verifications';
   
 type DispatchFormProps = {
     onSubmitForm: () => void
@@ -17,6 +18,7 @@ class TaxForm extends React.Component<Form> {
 
   state = {
     personal_content: true,
+    personal_form_verification: '',
     residence_content: true,
     family_content: true,
     account_content: true,
@@ -26,6 +28,17 @@ class TaxForm extends React.Component<Form> {
   }
 
   handlePersonalContentChange = () => this.setState({ personal_content: !this.state.personal_content })
+  handlePersonalFormVerificationChange = () => {
+    // check name, surname, personal id, phone and email
+    const pf = this.props.personal
+
+    // result will be either 'success' or 'failure'
+    const result = verifyForm(pf.name, pf.surname, pf.personal_id, pf.phone_number, pf.email)
+    
+    this.setState({ 
+      personal_form_verification: result 
+    })
+  }
   handleResidenceContentChange = () => this.setState({ residence_content: !this.state.residence_content })
   handleFamilyContentChange = () => this.setState({ family_content: !this.state.family_content })
   handleAccountContentChange = () => this.setState({ account_content: !this.state.account_content })
@@ -112,6 +125,21 @@ class TaxForm extends React.Component<Form> {
   }
 
   render () {
+    const renderPersonalFormVerification = (result: string, content: boolean) => {
+      if (result === 'success') 
+        return <i className="check icon" style={{ marginLeft: "0.65em", color: "#21BA45" }} />
+
+      if (result === 'failure' && !content)
+        return <i className="x icon" style={{ marginLeft: "0.65em", color: "#DB2828" }} />
+
+      if (result === '')
+        return <i className="pencil alternate icon" style={{ marginLeft: "0.65em", color: "#0E566C" }} />
+
+      return null
+    }
+
+    const personalFormVerification = renderPersonalFormVerification(this.state.personal_form_verification, this.state.personal_content)
+    
     return (
       <div className="row">
       	<div className="column" />
@@ -121,14 +149,14 @@ class TaxForm extends React.Component<Form> {
             <div className="ui icon message">
               <i className="cz flag" style={{ marginRight: "1em" }} />    
               <div className="content">
-                <p>Tento formulář je určen pouze pro osoby s občanstvím České republiky. Děkujeme za pochopení.</p>
+                <p>Tento formulář je určen pouze osobám s platným občanstvím České republiky. Děkujeme za pochopení.</p>
               </div>
             </div>
             <div className="ui icon message">
             	<img className="ui image" style={{ marginRight: "1em" }} width="60px" height="37px" alt="" src={school_hat_url} />    
               <div className="content">
                 <div className="header">Rád by ses dozvěděl o daňovém přiznání více?</div>
-                <p>Všechny informace nalezneš na oficiálním webu <a href="https://www.financnisprava.cz/cs/dane-elektronicky/danovy-portal"><b>ministerstva financí</b></a>.</p>
+                <p>Všechny informace nalezneš na oficiálním webu <a href="https://www.financnisprava.cz/cs/dane-elektronicky/danovy-portal" target="_blank" rel="noopener noreferrer"><b>ministerstva financí</b></a>.</p>
               </div>
             </div>
             <div className="ui form">
@@ -136,8 +164,15 @@ class TaxForm extends React.Component<Form> {
               <button className="ui label detail" onClick={this.handlePersonalContentChange}>
                 {this.state.personal_content ? "Skrýt" : "Otevřít"}
               </button>
-              <h4>1. Osobní údaje</h4>
-              {this.state.personal_content && <PersonalForm description={this.props.description} {...this.props.personal} />}
+              <h4 className="font">1. Osobní údaje {personalFormVerification}</h4>
+              {
+                this.state.personal_content && 
+                  <PersonalForm 
+                    {...this.props.personal} 
+                    description={this.props.description} 
+                    onVerificationForm={this.handlePersonalFormVerificationChange} 
+                  />
+              }
               {/* residence */}
               <button className="ui label detail" onClick={this.handleResidenceContentChange}>
                 {this.state.residence_content ? "Skrýt" : "Otevřít"}
