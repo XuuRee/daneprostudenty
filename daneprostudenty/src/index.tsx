@@ -3,16 +3,17 @@ import ReactDOM from 'react-dom'
 import './Static/Index.css'
 import App from './Components/App'
 import * as serviceWorker from './serviceWorker'
-import { compose, createStore } from "redux"
+import { compose, createStore, applyMiddleware } from "redux"
 import rootReducer from './Reducer'
 import { Provider } from 'react-redux'
+import thunk from "redux-thunk";
 
 const composeEnhancers =
   typeof window === "object" && (window as any).__REDUX_DEVTOOLS_EXTENSION_COMPOSE__
     ? (window as any).__REDUX_DEVTOOLS_EXTENSION_COMPOSE__({})
 		: compose
 
-const store = createStore(rootReducer, composeEnhancers())
+const store = createStore(rootReducer, composeEnhancers(applyMiddleware(thunk)))
 
 ReactDOM.render(
   <Provider store={store}>

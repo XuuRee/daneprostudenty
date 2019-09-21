@@ -1,6 +1,6 @@
 import React from 'react'
 import school_hat_url from "../../Images/school-hat.png"
-import { Form } from '../../State/State'
+import State, { Form } from '../../State/State'
 import PersonalForm from './PersonalForm';
 import ResidenceForm from './ResidenceForm';
 import FamilyForm from './FamilyForm';
@@ -9,12 +9,16 @@ import OfficeForm from './OfficeForm';
 import IncomeForm from './IncomeForm';
 import MarkdownForm from './MarkdownForm';
 import { verifyForm } from '../../Utils/Verifications';
+import { connect, MapDispatchToProps } from 'react-redux';
+import { ThunkDispatch } from 'redux-thunk';
+import { Action } from 'redux';
+import { downloadFile } from '../../Utils/Fetch';
   
 type DispatchFormProps = {
     onSubmitForm: () => void
 }
 
-class TaxForm extends React.Component<Form> {
+class TaxForm extends React.Component<Form & DispatchFormProps> {
 
   state = {
     personal_content: true,
@@ -121,7 +125,7 @@ class TaxForm extends React.Component<Form> {
     console.log(this.props.markdown.contributions)
     console.log(this.props.markdown.exams_payment)
 
-    // onSubmitForm();
+    this.props.onSubmitForm();
   }
 
   render () {
@@ -220,4 +224,14 @@ class TaxForm extends React.Component<Form> {
   }
 }
 
-export default TaxForm;
+const mapDispatchToProps: MapDispatchToProps<DispatchFormProps, {}> = (
+  dispatch: ThunkDispatch<State, void, Action>
+) => ({
+  onSubmitForm: () => dispatch(downloadFile())
+});
+
+export default connect(
+  undefined,
+  mapDispatchToProps
+)(TaxForm);
+
